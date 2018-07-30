@@ -1,0 +1,13 @@
+watchman watch ~/work/writing/plants
+
+watchman -j <<-EOT
+["trigger", "/Users/ben/work/writing/plants", {
+  "name": "plants",
+  "command": ["texi2pdf", "/Users/ben/work/writing/plants/plants.tex", "-o", "/Users/ben/work/writing/plants/plants.pdf"],
+  "append_file": false,
+  "expression": ["pcre", "tex$"]
+}]
+EOT
+
+# watchman --server-encoding=json --persistent log-level debug
+tail -f /usr/local/var/run/watchman/ben-state/log
